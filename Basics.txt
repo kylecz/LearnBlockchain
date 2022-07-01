@@ -1,0 +1,34 @@
+LESSON 1 - BLOCKCHAIN BASICS
+
+    Bitcoin allowed peer to peer transactions on this decentralized network and offered a superior store of value (gold); created by Satoshi Nakamoto
+        Built on cryptography and decentralization
+        Scarce amount
+        Bitcoin whitepaper: https://bitcoin.org/bitcoin.pdf
+        Blockchain: https://www.investopedia.com/terms/b/blockchain.asp
+
+    Building on this technology, Ethereum was created allowing for more interaction, through smart contracts; created by Vitalik Buterin
+        Ethereum whitepaper: https://ethereum.org/en/whitepaper/
+        *Nick Szabo originally created smart contracts in 1994
+        Smart contracts - set of instructions executed in a decentralized way without the need for a centralized party
+            They exist and are executed on blockchains, as opposed to between centralized authorities
+        Store of value AND smart contracts
+
+    The Oracle Problem - blockchains cannot interact with real world data; blockchains are deterministic systems
+        Blockchain Oracles - device that interacts with the off-chain world to provide external data or computation to smart contracts
+            https://betterprogramming.pub/what-is-a-blockchain-oracle-f5ccab8dbd72 
+            We cannot have a single centralized Oracle system, we need an Oracle Network that is also decentralized
+                This results in Hybrid Smart Contracts (on-chain + off-chain agreements)
+                    https://blog.chain.link/hybrid-smart-contracts-explained/ 
+                    Ex. Chainlink - the most popular Decentralized Oracle Network
+
+    Terminology: https://connect.comptia.org/content/articles/blockchain-terminology
+
+    Web1 - permissionless open sourced web with static content; read
+        Web2 - permissioned web, with dynamic content, where companies run your agreements on their servers; read + write
+            Web3 - permissionless web, with dynamic content, where decentralized censorship resistant networks run your agreement and code.  User-owned ecosystems; read + write + ownership
+
+    What is the value of smart contracts?  What problems do they solve?
+        they create Trusted Minimized Agreements (unbreakable promises)
+            the world is run on agreements; promises
+        they are immutable, decentralized, and transparent
+     
