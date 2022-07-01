@@ -1,0 +1,66 @@
+LESSON 1 - BASICS
+
+    A. Bitcoin allowed peer to peer transactions on a decentralized network and offered a superior store of value (gold)
+        created by Satoshi Nakamoto
+        built on cryptography and decentralization
+        scarce amount
+        Bitcoin whitepaper: https://bitcoin.org/bitcoin.pdf
+        Blockchain: https://www.investopedia.com/terms/b/blockchain.asp
+
+    B. Building on this technology, Ethereum was created allowing for more interaction, through 'smart contracts'
+        created by Vitalik Buterin
+        Ethereum whitepaper: https://ethereum.org/en/whitepaper/
+        *Nick Szabo originally created smart contracts in 1994
+        'smart contracts' - set of instructions executed in a decentralized way without the need for a centralized party
+            they exist and are executed on blockchains, as opposed to between centralized authorities
+        Ethereum = store of value + smart contracts
+
+    C. The Oracle Problem - blockchains cannot interact with real world data; blockchains are deterministic systems
+        Blockchain Oracles - device that interacts with the off-chain world to provide external data or computation to smart contracts
+            https://betterprogramming.pub/what-is-a-blockchain-oracle-f5ccab8dbd72 
+            we cannot have a single centralized Oracle system, we need an Oracle Network that is also decentralized
+                on-chain logic, yes is decentralized, but we also need our off-chain data computation to also be decentralized
+                    this results in Hybrid Smart Contracts (on-chain + off-chain agreements)
+                        https://blog.chain.link/hybrid-smart-contracts-explained/ 
+                        Ex. Chainlink - the most popular Decentralized Oracle Network and it blockchain agnostic
+                            https://www.youtube.com/watch?v=tIUHQ7sDoaU&ab_channel=Chainlink
+
+    Terminology: https://connect.comptia.org/content/articles/blockchain-terminology
+
+    D. 
+    Web1 - permissionless open sourced web with static content; read
+        Web2 - permissioned web, with dynamic content, where companies (centralized) run your agreements on their servers; read + write
+            Web3 - permissionless web, with dynamic content, where decentralized censorship resistant networks run your agreement and code.  User-owned ecosystems; read + write + ownership
+
+    E. What is the value of smart contracts?  What problems do they solve?
+        they create Trusted Minimized Agreements (unbreakable promises)
+            the world is run on agreements; promises
+        it is an agreement, contract, or set of instructions that are deployed on a decentralized blockchain
+            they are immutable (+secure), decentralized, and transparent
+            move from paper (brand-based) guarantees to cryptographic (math-based) guarantees
+        examples:
+            DeFi - gives the ability of users to engage with finance without having to go through a centralized intermediary
+                https://chain.link/education/defi
+                https://medium.com/the-capital/why-defi-1519cc4d4bd3
+            DAO (Decentralized Autonomous Organization) - group governed by a transparent set of rules defined within a smart contract
+                https://betterprogramming.pub/what-is-a-dao-what-is-the-architecture-of-a-dao-how-to-build-a-dao-high-level-d096a97162cc
+            NFT - unique assets
+    
+    F. 
+        Metamask - https://metamask.io/
+        Etherscan - block explorer for Ethereum
+            https://etherscan.io/
+        Accounts:
+            each account has a unique Public key and Private key
+                *Private key gives you full access to that given account
+                https://www.coinbase.com/learn/crypto-basics/what-is-a-private-key
+            Secret Recovery Phase - key that gives you access to all accounts within your wallet
+                allows us to create 1+ accounts
+                https://metamask.zendesk.com/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure
+        Networks - we have the 'Ethereum Mainnet' where actual transactions live and then we have additional test networks that allow us to test transactions using fake money
+            https://rinkeby.etherscan.io/
+
+
+
+
+     
