@@ -104,7 +104,6 @@ LESSON 1 - BASICS
                         when the network is > 50% utilization, base fee inc; when network is < 50% utilization, base fee dec
                             this results in the network aiming for equillibrium (50%)
                 
-
     H.
         How do blockchains work?
             https://ethereum.org/en/developers/docs/intro-to-ethereum/
@@ -115,7 +114,8 @@ LESSON 1 - BASICS
             Block - data and state storage
                 we now introduce more inputs (Block number, Nonce, Data/Tx)
                 Mining - the process of finding the solution to a blockchain problem (e.g. finding a hash value that starts with four 0's)
-                Special computers get paid for solving these problems or 'mining' blocks 
+                Special computers (Nodes) get paid for solving these problems or 'mining' blocks
+                    Nodes - computer running this blockchain technology
                 Nonce - number used to find the solution to the blockchain problem
                     *in Ethereum, it is also used to define the transaction number for an account/address
                     https://andersbrownworth.com/blockchain/block
@@ -124,13 +124,38 @@ LESSON 1 - BASICS
                     this is where we introduce another input called 'Previous' (points to previous hash of the last block)
                 *data in a give block cannot be changed without changing all subsequest blocks .. this would also require consensus of the entire blockchain distributed network
                 https://andersbrownworth.com/blockchain/blockchain
-                *Genesis Block - is the very first block in a blockchain; Previous value is all 0's
-            Distributed Blockchain - introduce decentralized, peer-to-peer blockchains; computers that are running the exact same blockchain
-                every computer (node) in the network must agree upon each new block and the chain as a whole
-                    nodes ensure that everyone interacting with the blockchain have the same data
-                    to accomplish this distributed agreement, blockchains need a consensus mechanism (e.g. 'proof-of-work')
-                        this consensus mechanism is known as 'mining'
+                *Genesis Block - is the very first block in a blockchain; Previous value is all 0's     
+            Distributed Blockchain - introduce decentralized, peer-to-peer blockchains; many nodes that are running/interacting the exact same blockchain
                 https://andersbrownworth.com/blockchain/distributed
+                every node in the network must agree upon each new block and the chain as a whole; nodes store lists of every transaction that takes place
+                    nodes ensure that everyone interacting with the blockchain have the same data
+                    to accomplish this distributed agreement on state, blockchains need a 'consensus' mechanism
+                        consensus can be broken down into:
+                            A. Chain selection - figuring out which blockchain is the "right" one   
+                                *use the Nakamoto Consensus rule - says that we use the blockchain with the most blocks; Longest Chain Blockchain
+                            B. Sybil Resistance - way that avoids the creation of many nodes to gain incentives (e.g. advanced computation)
+                        Sybil Resistance options: (*Nakamoto Consensus = Proof-of-work + Chain selection)
+                            1. Proof-of-work - single node (author) completes advanced computation to complete a blockchain problem; mining
+                                https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/
+                                nodes are competing against one another to complete the blockchain problem  
+                                    *miners are attempting to find the nonce for a block; once found, the block will be added to the chain
+                                first node to complete the problem will gain the transaction fee
+                                    *miners also get paid from this Block Reward, in addition to the transaction fee
+                                *requires a lot of energy
+                                Block Time - amount of time for a block to be published
+                                Block Confirmations - number of additional blocks added on after our transaction completed
+                            2. Proof-of-stake - nodes put up collateral as a Sybil Resistance mechanism
+                                https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/
+                                miners are called 'Validators'; they just validate other nodes
+                                nodes are randomly chosen to complete the block, and then validators validate
+                                    *compared to in PoW where every miner is eager complete the block
+                                    *randomness is important. Blockchains are deterministic systems so having random numbers doesnt make sense. (e.g.) Randomness is determined using RamDAO; org that determines this number
+                                *uses way less energy
+                                *Eth2.0 will use PoS
+                                    *Eth2.0 will also introduce 'Sharding', a solution to the blockchain scalability problem
+                                        with limited block space and number of transactions, when many people want to use the blockchain, gas prices skyrocket .. this isnt scalable
+                                        Sharding - a blockchain of blockchains; one main blockchain will coordinate many other blockchains, essentially inc block space and the number of transactions
+                
             Tokens - we have the same setup as before but now instead of having a 'Data' section, we have a 'Transaction' (Tx) section
                 https://andersbrownworth.com/blockchain/tokens 
                 Tx shows all transactions in each block
