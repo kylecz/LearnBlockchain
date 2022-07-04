@@ -57,10 +57,102 @@ LESSON 1 - BASICS
             Secret Recovery Phase - key that gives you access to all accounts within your wallet
                 allows us to create 1+ accounts
                 https://metamask.zendesk.com/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure
-        Networks - we have the 'Ethereum Mainnet' where actual transactions live and then we have additional test networks that allow us to test transactions using fake money
-            https://rinkeby.etherscan.io/
+        Networks - we have the 'Ethereum Mainnet' where actual transactions live
+            then we have additional test networks (e.g. Rinkeby) that allow us to test transactions using fake money
+                https://rinkeby.etherscan.io/
+                Faucets are used to send "fake" ethereum money to our wallets on a given test networks (e.g. Rinkeby)
+                    https://faucets.chain.link
+    
+    G.
+        Gas
+            https://ethereum.org/en/developers/docs/gas/
+            If we view a transaction on etherscan.io, we see a couple things including:
+                Transaction Fee - blockchain is being run by all of these 'nodes', and these nodes are paid incentives for performing transactions
+                Gas Price - price for one unit of gas
+                    gas is a unit of computational measure
+                    the more complex your transaction is or the more people sending transactions, the more gas you will have to pay
+                    *priced in Gwei - 1 Ether = 10^9 Gwei = 10^18 Wei; easier ways of understanding smaller amounts of Ether
+                    Gas Limit - we require gas for a transaction to take place
+                        *we can specify that amount of gas supplied for a given transaction
+                    Gas Fees:
+                        Base - min Gas Price to send to complete transaction
+                        Max - ...
+                        Max Priority - max + amount willing to give as tip to miners
+                    Burnt - some gas gets permanently burnt forever
+                    (typically) Transaction Fee = Gas Usage * Gas Price
+            The more people sending transactions at the same time, the more expensive gas prices are
+            When we send a transaction, we will have to wait for the transaction to process
+            https://eth-converter.com/
+            https://ethgasstation.info/
+        Ethereum Improvement Proposal (EIP)
+            https://www.youtube.com/watch?v=MGemhK9t44Q&ab_channel=Finematics
+            mechanism of proposing changes to the Ethereum network
+            document covering technical details and rational behind a change
+            EIP 1559 - certain proposal that has great implications when it comes to monetary and client apps (e.g. wallets)
+                current ethereum price model - 'First-Price Auction'
+                    users who want transactions picked up by miners have to bid their space in a block; they do this by submitting a gas price (price willing to pay for a given transaction)
+                    miners are incentivized to pick up transactions and sorting them by the highest gas prices
+                    this results in users paying very high gas prices
+                    inexperienced users may also find themselves waiting a long time for a transaction to complete if they dont know what the gas price should be
+                EIP 1559
+                    aims to solve problems with the First-Price Auction approach
+                    proposed changes:
+                        Base Fee - min fee that must be paid by a transaction to be included in a block; set per block and can be inc/dec depending on how congested the network is
+                        increase in network capacity by changing the max gas limit per block from 12.5M (current) to 25M gas; doubling block size
+                        Miner Tip - separate fee paid directly to miner to incentive them to prioritize the transaction
+                    impact of changes:
+                        when the network is > 50% utilization, base fee inc; when network is < 50% utilization, base fee dec
+                            this results in the network aiming for equillibrium (50%)
+                
 
-
-
+    H.
+        How do blockchains work?
+            https://ethereum.org/en/developers/docs/intro-to-ethereum/
+            Hash - unique, fixed length string meant to identify a piece of data.  They are created by inputting said data into a 'hash function' (e.g. SHA256)
+                Hash Function - a function that computes data into a unique hash value
+                https://andersbrownworth.com/blockchain/hash
+                https://techjury.net/blog/what-is-cryptographic-hash/
+            Block - data and state storage
+                we now introduce more inputs (Block number, Nonce, Data/Tx)
+                Mining - the process of finding the solution to a blockchain problem (e.g. finding a hash value that starts with four 0's)
+                Special computers get paid for solving these problems or 'mining' blocks 
+                Nonce - number used to find the solution to the blockchain problem
+                    *in Ethereum, it is also used to define the transaction number for an account/address
+                    https://andersbrownworth.com/blockchain/block
+            Blockchain - public database updated and shared across many computers in a network
+                'chain' refers to one or more blocks cryptographically related by referencing its parent block
+                    this is where we introduce another input called 'Previous' (points to previous hash of the last block)
+                *data in a give block cannot be changed without changing all subsequest blocks .. this would also require consensus of the entire blockchain distributed network
+                https://andersbrownworth.com/blockchain/blockchain
+                *Genesis Block - is the very first block in a blockchain; Previous value is all 0's
+            Distributed Blockchain - introduce decentralized, peer-to-peer blockchains; computers that are running the exact same blockchain
+                every computer (node) in the network must agree upon each new block and the chain as a whole
+                    nodes ensure that everyone interacting with the blockchain have the same data
+                    to accomplish this distributed agreement, blockchains need a consensus mechanism (e.g. 'proof-of-work')
+                        this consensus mechanism is known as 'mining'
+                https://andersbrownworth.com/blockchain/distributed
+            Tokens - we have the same setup as before but now instead of having a 'Data' section, we have a 'Transaction' (Tx) section
+                https://andersbrownworth.com/blockchain/tokens 
+                Tx shows all transactions in each block
+            Public/Private Keys
+                how do we know that, in fact, personX made a transaction to personY?  This is where we introduce 'public/private keys' and 'signing'
+                Private Key - used to 'sign' transactions
+                    *should only be known by the key holder
+                Public Key - key holder's public representation
+                    *created from your private key using the Elliptic Curve Digital Signature algorithm
+                    *our account public address is some derivitive of our public and private keys inputted in an algorithm
+                        *Private Key > Public Key > Pulic Address
+                https://andersbrownworth.com/blockchain/public-private-keys/keys
+            Signing
+                you can 'sign' some given data using your private key which would output a 'signature' string value  
+                    no one can take that message signature a reverse engineer it to get your private key
+                    however, using your public key, you can 'verify' that that signature (and initial data) is in fact yours
+                https://andersbrownworth.com/blockchain/public-private-keys/signatures
+            Signing Transactions   
+                same idea but now instead of some data, we can sign a transaction (from public address X to public address Y)
+                and then any public entity can verify the transaction using your public key
+                https://andersbrownworth.com/blockchain/public-private-keys/transaction
+        
+   
 
      
