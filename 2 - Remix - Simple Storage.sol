@@ -25,14 +25,41 @@
         // 'pure' - disallows you to read from state
         // *if a gas calling function calls a 'view' or 'pure' function, then it will cost gas
         // *orange buttons run transactions, blue buttons do not (they do not cost any has, they are not assigned a hash value)
+    // 'returns' - answers, what is this function going to give us after we call it? (i.e. give us a uint256)
+
+// ARRAYS & STRUCTS
+    // what if we want to store a range of objects
+    // 'struct' - allows us to create a new 'type'
+    // 'array' - data structure; way to store a list of many types (type + visibility + variable name)
+        // People[] is called a 'dynamic array' since the size isnt specified
 
 pragma solidity 0.8.8;
     // ^0.8.8 tells the compiler that any version above 0.8.8 will work
     // >=0.8.8 <0.9.0
 
 contract SimpleStorage {  // sort of like a Class like in OOP
+
+    // variables
     uint256 public funNumber;  // initialized to zero
-    
+    ////People public person = People({funNumber: 2, name: "Kyle"});  // creating a variable called 'person' using the new 'type' that we created (below) called 'People'. Output gives us a getter function with the two indexed (0,1) values
+    // if you have many variables (persons) to define, it may become cumbersome .. let's create an 'array' (as shown below)
+        
+    // create a new 'type' that stores 2 values
+    // now we can use this new 'type' and assign it to a variable (as shown above)
+    struct People {
+        uint256 funNumber;
+        string name;
+    }
+
+    // 'array'
+    People[] public people;
+
+    // create function to add people to our array
+    function addPerson(string memory _name, uint256 _funNumber) public {
+        people.push(People(_funNumber, _name));  // array (people) .push (adding) a new People (struct) passing a _funNumber and _name value
+        // now we can click the 'addPerson' button to continuously add 'name, #' to the array and index by the 'people' button (0, 1, 2, ...)
+    }
+
     // function called 'store', takes some parameter, and will set the funNumber variable to some number that we pass
     // 'Deploy and Run Transactions' > click 'Deploy' > ...
     // add a value to the 'store' function, click 'store' > click 'funNumber' variable ... 
@@ -45,6 +72,7 @@ contract SimpleStorage {  // sort of like a Class like in OOP
     // we can create a function that return the value of funNumber
     // this function mimics the 'public' visibility function
     // *'view' function does NOT cost any gas; we are simply reading from the contract
+        // *if a different function called this retrieve function, then yes, there would be a cost
     function retrieve() public view returns(uint256){
         return funNumber;
     }
