@@ -9,7 +9,7 @@
     // used to define variables
         // we can add bytes after to state how big that number can get; uint256, int8
 
-// FUNCTIONS (METHODS)
+// 1. FUNCTIONS (METHODS)
     // self-contained modules that execute some subset of code when called
     // 'Deploy and Run Transactions' tab used to deploy to a test JavaScript VM engine
         // we can use this test local blockchain, with these fake accounts that have 100 Eth, to test our contracts
@@ -27,11 +27,10 @@
         // *orange buttons run transactions, blue buttons do not (they do not cost any has, they are not assigned a hash value)
     // 'returns' - answers, what is this function going to give us after we call it? (i.e. give us a uint256)
 
-// ARRAYS & STRUCTS
+// 2. ARRAYS & STRUCTS
     // what if we want to store a range of objects
     // 'struct' - allows us to create a new 'type'
     // 'array' - data structure; way to store a list of many types (type + visibility + variable name)
-        // People[] is called a 'dynamic array' since the size isnt specified
 
 pragma solidity 0.8.8;
     // ^0.8.8 tells the compiler that any version above 0.8.8 will work
@@ -39,27 +38,10 @@ pragma solidity 0.8.8;
 
 contract SimpleStorage {  // sort of like a Class like in OOP
 
+    // 1. a)
     // variables
     uint256 public funNumber;  // initialized to zero
-    ////People public person = People({funNumber: 2, name: "Kyle"});  // creating a variable called 'person' using the new 'type' that we created (below) called 'People'. Output gives us a getter function with the two indexed (0,1) values
-    // if you have many variables (persons) to define, it may become cumbersome .. let's create an 'array' (as shown below)
-        
-    // create a new 'type' that stores 2 values
-    // now we can use this new 'type' and assign it to a variable (as shown above)
-    struct People {
-        uint256 funNumber;
-        string name;
-    }
-
-    // 'array'
-    People[] public people;
-
-    // create function to add people to our array
-    function addPerson(string memory _name, uint256 _funNumber) public {
-        people.push(People(_funNumber, _name));  // array (people) .push (adding) a new People (struct) passing a _funNumber and _name value
-        // now we can click the 'addPerson' button to continuously add 'name, #' to the array and index by the 'people' button (0, 1, 2, ...)
-    }
-
+    // 1. b)
     // function called 'store', takes some parameter, and will set the funNumber variable to some number that we pass
     // 'Deploy and Run Transactions' > click 'Deploy' > ...
     // add a value to the 'store' function, click 'store' > click 'funNumber' variable ... 
@@ -68,7 +50,7 @@ contract SimpleStorage {  // sort of like a Class like in OOP
     function store(uint256 _funNumber) public {  
         funNumber = _funNumber;
     }
-
+    // 1. c)
     // we can create a function that return the value of funNumber
     // this function mimics the 'public' visibility function
     // *'view' function does NOT cost any gas; we are simply reading from the contract
@@ -77,5 +59,38 @@ contract SimpleStorage {  // sort of like a Class like in OOP
         return funNumber;
     }
 
+    // 2. a)
+    // create a new 'type' that stores 2 values
+    // now we can use this new People 'type' and assign it to a variable (as shown above)
+    struct People {
+        uint256 funNumber;
+        string name;
+    }
+    // 2. b)
+    // we can do exactly what we did before but now use our new People type (instead of uint256); create variable called 'person' using the People type
+    // since were using a struct, we need to use '{}'
+    // output gives us a getter function with two values; uint256: funNumber at index 0, string: name at index 1 (*when you create lists, they get indexed)
+    ////People public person = People({funNumber: 2, name: "Kyle"});
+    // if you have many people to define, it may become cumbersome 
+    ////People public person2 = People({funNumber: 7, name: "Emma"});
+    // so let's create an 'array'...
+    // 2. c)
+    // create an 'array'; (same idea as before) specify array type (People[]), visibility, and variable name (people)
+    // output now gives us a form to fill out; input uint256 paramter; if we input any number, nothing will actually happen because our people list is empty
+        // so we need to create a function that will add people to our array (below)
+    People[] public people;
+        // People[] is called a 'dynamic array' since the size isnt specified; if we add a number within the brackets, then that would specify the size of the array
+    // 2. d)
+    // let's add people to the array that we've defined above
+    function addPerson(string memory _name, uint256 _funNumber) public {  // _name, _funNumber are our inputs
+        // let's call a 'push' (to add) function that on our 'people' object (our array)
+        // let's also create a new People object (our struct) that will take in the _funNumber, _name inputs
+        //////////////////////people.push(People(_funNumber, _name));
+        // *we could also do it this way:
+        // create variable of type People and include inputs within the {} (just like we saw in 2. b))
+        // *if we dont include 'memory', then we will receive error: "Data location must be storage, memory, or calldata for variable"
+        People memory newPerson = People({funNumber: _funNumber, name: _name});
+        people.push(newPerson);
+    }
 
 }  
