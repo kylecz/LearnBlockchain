@@ -49,6 +49,9 @@
             // meaning that solidity knows that a uint256 will live in memory, so we dont need to specify it, BUT we do for the string
                 // *strings are array of bytes, therefore we need to specify the data location for arrays
 
+// 3. MAPPINGS
+    // what if we know someone's name but not their funNumber? Yes, we could look through each and every index in the 'people' array but that's not ideal. What if we had hundreds of objects in this array?
+    // mapping - data structure where a key is mapped to a single value; dictionary
 
 pragma solidity 0.8.8;
     // ^0.8.8 tells the compiler that any version above 0.8.8 will work
@@ -121,6 +124,9 @@ contract SimpleStorage {  // sort of like a Class like in OOP
         // *another way to do this:
         // create a new People object (our struct) that will take in the inputs (_funNumber, _name) and then add ('push') them to the 'person' (array)
         ////people.push(People(_funNumber, _name));
+
+        // 3. a) ii)
+        nameToFunNumber[_name] = _funNumber;
     }
     // output:
         // input into the addPerson form (string _name, uint256 _funNumber; John, 9) and click on the orange addPerson button
@@ -128,5 +134,14 @@ contract SimpleStorage {  // sort of like a Class like in OOP
             // output for the 0 index should be: uint256: funNumber 9 (at index 0), string: name John (at index 1)
         // if we input another entry (addPerson: Cassy, 11), then that will be the output for the 1 index of the people form
         // if we input 2 into the people form, nothing will happen because we dont have a 3rd person
+
+
+    // 3. a) i)
+    // create a mapping (nameToFunNumber) that maps our names to a number
+    // *add to 2. d)
+    mapping(string => uint256) public nameToFunNumber;
+    // output:
+        // input into the nameToFunNumber form (string; Cassy) and nothing will happen since everything is initialized to 0
+        // input new entries into the addPerson form and try the nameToFunNumber form again and it should work
 
 }  
