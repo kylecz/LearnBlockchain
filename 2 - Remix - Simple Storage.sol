@@ -31,7 +31,24 @@
 // 2. ARRAYS & STRUCTS
     // what if we want to store a range of objects
     // 'struct' - allows us to create a new 'type'
-    // 'array' - data structure; way to store a list of many types (type + visibility + variable name)
+    // 'array' - data structure; way to store a list of many types (type + visibility + variable name)\
+
+// ERRORS & WARNINGS
+    // errors - mean that the code isnt compiling
+    // warnings - do NOT stop the code from compiling but they provide insight into improving your contract
+
+// MEMORY, STORAGE, CALLDATA
+    // 6 places we can store data: stack, memory, storage, calldata, code, logs
+        // *we cannot define variables as stack, code, or logs
+    // storage - variable data exists permanently (outside the function being executed) and CAN be modified
+        // e.g. "uint256 public funNumber" is, by default, a 'storage' variable
+    // calldata - variable data exists temporarily and CANNOT be modified
+    // memory - variable data exists temporarily and CAN be modified
+        // in 2. d), why did we add 'memory' to string _name but not to uint256 _funNumber?
+            // if we add 'memory' to _funNumber, we get this error: "data location can only be specified for array, struct, or mapping types"
+            // meaning that solidity knows that a uint256 will live in memory, so we dont need to specify it, BUT we do for the string
+                // *strings are array of bytes, therefore we need to specify the data location for arrays
+
 
 pragma solidity 0.8.8;
     // ^0.8.8 tells the compiler that any version above 0.8.8 will work
@@ -85,12 +102,12 @@ contract SimpleStorage {  // sort of like a Class like in OOP
     // so let's create an 'array' (2. c))
 
     // 2. c)
-    // create an 'array'; (same idea as before) specify array type (People[]), visibility, and variable name (people)
+    // create an 'array'; (same idea as before) specify array type (People[]), visibility, and array name (people)
     People[] public people;
         // output:
-            // gives us a form to fill out; if we input anything, nothing will actually happen because our people list is empty
+            // input into the people form (uint256; 0) and we'll notice that nothing actually happens because our people list is empty
         // so we need to create a function that will add people to our array (2. d))
-        // *People[] is called a 'dynamic array' since the size isnt specified; if we add a number within the brackets, then that would specify the size of the array
+        // *People[] creates a 'dynamic array' since the size isnt specified; if we add a number within the brackets, then that would specify the size of the array
 
     // 2. d)
     // let's add people to the array that we've defined above
@@ -108,6 +125,8 @@ contract SimpleStorage {  // sort of like a Class like in OOP
     // output:
         // input into the addPerson form (string _name, uint256 _funNumber; John, 9) and click on the orange addPerson button
         // input into the people form (uint256; 0) and click on the blue people button
-            // output for the 0 index should be John, 9
+            // output for the 0 index should be: uint256: funNumber 9 (at index 0), string: name John (at index 1)
+        // if we input another entry (addPerson: Cassy, 11), then that will be the output for the 1 index of the people form
+        // if we input 2 into the people form, nothing will happen because we dont have a 3rd person
 
 }  
