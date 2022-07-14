@@ -1,183 +1,161 @@
-LESSON 1 - BASICS
+// SPDX-License-Identifier: MIT 
+    // license identifier
 
-    A. Bitcoin allowed peer to peer transactions on a decentralized network and offered a superior store of value (gold)
-        created by Satoshi Nakamoto
-        built on cryptography and decentralization
-        scarce amount
-        Bitcoin whitepaper: https://bitcoin.org/bitcoin.pdf
-        Blockchain: https://www.investopedia.com/terms/b/blockchain.asp
+// CTRL+S to run the compiler
+// Ethereum Virtual Machine (EVM) - standard for deploying contracts to Ethereum
+    // e.g. EVM compatible blockchains: Avalanche, Fantom, Polygon
 
-    B. Building on this technology, Ethereum was created allowing for more interaction, through 'smart contracts'
-        created by Vitalik Buterin
-        Ethereum whitepaper: https://ethereum.org/en/whitepaper/
-        *Nick Szabo originally created smart contracts in 1994
-        'smart contracts' - set of instructions executed in a decentralized way without the need for a centralized party
-            they exist and are executed on blockchains, as opposed to between centralized authorities
-        Ethereum = store of value + smart contracts
+// TYPES
+    // https://docs.soliditylang.org/en/latest/types.html
+    // used to define variables
+    // boolean (true, false), uint (whole number that is only positive), int, address, string, bytes
+        // we can add bytes after to state how big that number can get; e.g. uint256, int8
 
-    C. The Oracle Problem - blockchains cannot interact with real world data; blockchains are deterministic systems
-        Blockchain Oracles - device that interacts with the off-chain world to provide external data or computation to smart contracts
-            https://betterprogramming.pub/what-is-a-blockchain-oracle-f5ccab8dbd72 
-            we cannot have a single centralized Oracle system, we need an Oracle Network that is also decentralized
-                on-chain logic, yes is decentralized, but we also need our off-chain data computation to also be decentralized
-                    this results in Hybrid Smart Contracts (on-chain + off-chain agreements)
-                        https://blog.chain.link/hybrid-smart-contracts-explained/ 
-                        Ex. Chainlink - the most popular Decentralized Oracle Network and it blockchain agnostic
-                            https://www.youtube.com/watch?v=tIUHQ7sDoaU&ab_channel=Chainlink
+// 1. FUNCTIONS (METHODS)
+    // self-contained modules that execute some subset of code when called
+    // 'Deploy and Run Transactions' tab used to deploy to a test JavaScript VM engine
+        // we can use this test local blockchain, with these fake accounts that have 100 Eth, to deploy and test our contracts
+        // any time we change something on-chain, including creating a new contract or calling a function, a transaction is sent and some gas is paid
+    // Visibility - https://docs.soliditylang.org/en/v0.7.3/contracts.html#visibility-and-getters
+        // 'public' - will create a 'getter' function that returns the value of the variable
+        // 'private' - only this contract can call this function
+        // 'external' - only an external source can call this function
+        // 'internal' - only this contract can call this function
+            // *this is the default if we do not specify a visibility
+    // scope - when we create a function, it can only be referenced in the scope of where it was defined (i.e. in the curly brackets {})
+    // 'view' and 'pure' functions, when called, do NOT spend gas; they also disallow any modification of state
+        // 'view' - reads state from contract
+        // 'pure' - disallows you to read from state
+        // *if a gas calling function calls a 'view' or 'pure' function, then it will cost gas
+    // *orange buttons run transactions, blue buttons do not (they do not cost any gas, they are not assigned a hash value)
+    // 'returns' - answers, what is this function going to give us after we call it? (i.e. give us a uint256)
 
-    Terminology: https://connect.comptia.org/content/articles/blockchain-terminology
+// 2. ARRAYS & STRUCTS
+    // what if we want to store a range of objects
+    // 'struct' - allows us to create a new 'type'
+    // 'array' - data structure; way to store a list of many types (type + visibility + variable name)\
 
-    D. 
-    Web1 - permissionless open sourced web with static content; read
-        Web2 - permissioned web, with dynamic content, where companies (centralized) run your agreements on their servers; read + write
-            Web3 - permissionless web, with dynamic content, where decentralized censorship resistant networks run your agreement and code.  User-owned ecosystems; read + write + ownership
+// ERRORS & WARNINGS
+    // errors - mean that the code isnt compiling
+    // warnings - do NOT stop the code from compiling but they provide insight into improving your contract
 
-    E. What is the value of smart contracts?  What problems do they solve?
-        they create Trusted Minimized Agreements (unbreakable promises)
-            the world is run on agreements; promises
-        it is an agreement, contract, or set of instructions that are deployed on a decentralized blockchain
-            they are immutable (+secure), decentralized, and transparent
-            move from paper (brand-based) guarantees to cryptographic (math-based) guarantees
-        examples:
-            DeFi - gives the ability of users to engage with finance without having to go through a centralized intermediary
-                https://chain.link/education/defi
-                https://medium.com/the-capital/why-defi-1519cc4d4bd3
-            DAO (Decentralized Autonomous Organization) - group governed by a transparent set of rules defined within a smart contract
-                https://betterprogramming.pub/what-is-a-dao-what-is-the-architecture-of-a-dao-how-to-build-a-dao-high-level-d096a97162cc
-            NFT - unique assets
-    
-    F. 
-        Metamask - https://metamask.io/
-        Etherscan - block explorer for Ethereum
-            https://etherscan.io/
-        Accounts:
-            each account has a unique Public key and Private key
-                *Private key gives you full access to that given account
-                https://www.coinbase.com/learn/crypto-basics/what-is-a-private-key
-            Secret Recovery Phase - key that gives you access to all accounts within your wallet
-                allows us to create 1+ accounts
-                https://metamask.zendesk.com/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure
-        Networks - we have the 'Ethereum Mainnet' where actual transactions live
-            then we have additional test networks (e.g. Rinkeby) that allow us to test transactions using fake money
-                https://rinkeby.etherscan.io/
-                Faucets are used to send "fake" ethereum money to our wallets on a given test networks (e.g. Rinkeby)
-                    https://faucets.chain.link
-    
-    G.
-        Gas
-            https://ethereum.org/en/developers/docs/gas/
-            If we view a transaction on etherscan.io, we see a couple things including:
-                Transaction Fee - blockchain is being run by all of these 'nodes', and these nodes are paid incentives for performing transactions
-                Gas Price - price for one unit of gas
-                    gas is a unit of computational measure
-                    the more complex your transaction is or the more people sending transactions, the more gas you will have to pay
-                    *priced in Gwei - 1 Ether = 10^9 Gwei = 10^18 Wei; easier ways of understanding smaller amounts of Ether
-                    Gas Limit - we require gas for a transaction to take place
-                        *we can specify that amount of gas supplied for a given transaction
-                    Gas Fees:
-                        Base - min Gas Price to send to complete transaction
-                        Max - ...
-                        Max Priority - max + amount willing to give as tip to miners
-                    Burnt - some gas gets permanently burnt forever
-                    (typically) Transaction Fee = Gas Usage * Gas Price
-            The more people sending transactions at the same time, the more expensive gas prices are
-            When we send a transaction, we will have to wait for the transaction to process
-            https://eth-converter.com/
-            https://ethgasstation.info/
-        Ethereum Improvement Proposal (EIP)
-            https://www.youtube.com/watch?v=MGemhK9t44Q&ab_channel=Finematics
-            mechanism of proposing changes to the Ethereum network
-            document covering technical details and rational behind a change
-            EIP 1559 - certain proposal that has great implications when it comes to monetary and client apps (e.g. wallets)
-                current ethereum price model - 'First-Price Auction'
-                    users who want transactions picked up by miners have to bid their space in a block; they do this by submitting a gas price (price willing to pay for a given transaction)
-                    miners are incentivized to pick up transactions and sorting them by the highest gas prices
-                    this results in users paying very high gas prices
-                    inexperienced users may also find themselves waiting a long time for a transaction to complete if they dont know what the gas price should be
-                EIP 1559
-                    aims to solve problems with the First-Price Auction approach
-                    proposed changes:
-                        Base Fee - min fee that must be paid by a transaction to be included in a block; set per block and can be inc/dec depending on how congested the network is
-                        increase in network capacity by changing the max gas limit per block from 12.5M (current) to 25M gas; doubling block size
-                        Miner Tip - separate fee paid directly to miner to incentive them to prioritize the transaction
-                    impact of changes:
-                        when the network is > 50% utilization, base fee inc; when network is < 50% utilization, base fee dec
-                            this results in the network aiming for equillibrium (50%)
-                
-    H.
-        How do blockchains work?
-            https://ethereum.org/en/developers/docs/intro-to-ethereum/
-            Hash - unique, fixed length string meant to identify a piece of data.  They are created by inputting said data into a 'hash function' (e.g. SHA256)
-                Hash Function - a function that computes data into a unique hash value
-                https://andersbrownworth.com/blockchain/hash
-                https://techjury.net/blog/what-is-cryptographic-hash/
-            Block - data and state storage
-                we now introduce more inputs (Block number, Nonce, Data/Tx)
-                Mining - the process of finding the solution to a blockchain problem (e.g. finding a hash value that starts with four 0's)
-                Special computers (Nodes) get paid for solving these problems or 'mining' blocks
-                    Nodes - computer running this blockchain technology
-                Nonce - number used to find the solution to the blockchain problem
-                    *in Ethereum, it is also used to define the transaction number for an account/address
-                    https://andersbrownworth.com/blockchain/block
-            Blockchain - public database updated and shared across many computers in a network
-                'chain' refers to one or more blocks cryptographically related by referencing its parent block
-                    this is where we introduce another input called 'Previous' (points to previous hash of the last block)
-                *data in a give block cannot be changed without changing all subsequest blocks .. this would also require consensus of the entire blockchain distributed network
-                https://andersbrownworth.com/blockchain/blockchain
-                *Genesis Block - is the very first block in a blockchain; Previous value is all 0's     
-            Distributed Blockchain - introduce decentralized, peer-to-peer blockchains; many nodes that are running/interacting the exact same blockchain
-                https://andersbrownworth.com/blockchain/distributed
-                every node in the network must agree upon each new block and the chain as a whole; nodes store lists of every transaction that takes place
-                    nodes ensure that everyone interacting with the blockchain have the same data
-                    to accomplish this distributed agreement on state, blockchains need a 'consensus' mechanism
-                        consensus can be broken down into:
-                            A. Chain selection - figuring out which blockchain is the "right" one   
-                                *use the Nakamoto Consensus rule - says that we use the blockchain with the most blocks; Longest Chain Blockchain
-                            B. Sybil Resistance - way that avoids the creation of many nodes to gain incentives (e.g. advanced computation)
-                        Sybil Resistance options: (*Nakamoto Consensus = Proof-of-work + Chain selection)
-                            1. Proof-of-work - single node (author) completes advanced computation to complete a blockchain problem; mining
-                                https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/
-                                nodes are competing against one another to complete the blockchain problem  
-                                    *miners are attempting to find the nonce for a block; once found, the block will be added to the chain
-                                first node to complete the problem will gain the transaction fee
-                                    *miners also get paid from this Block Reward, in addition to the transaction fee
-                                *requires a lot of energy
-                                Block Time - amount of time for a block to be published
-                                Block Confirmations - number of additional blocks added on after our transaction completed
-                            2. Proof-of-stake - nodes put up collateral as a Sybil Resistance mechanism
-                                https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/
-                                miners are called 'Validators'; they just validate other nodes
-                                nodes are randomly chosen to complete the block, and then validators validate
-                                    *compared to in PoW where every miner is eager complete the block
-                                    *randomness is important. Blockchains are deterministic systems so having random numbers doesnt make sense. (e.g.) Randomness is determined using RamDAO; org that determines this number
-                                *uses way less energy
-                                *Eth2.0 will use PoS
-                                    *Eth2.0 will also introduce 'Sharding', a solution to the blockchain scalability problem
-                                        with limited block space and number of transactions, when many people want to use the blockchain, gas prices skyrocket .. this isnt scalable
-                                        Sharding - a blockchain of blockchains; one main blockchain will coordinate many other blockchains, essentially inc block space and the number of transactions
-                
-            Tokens - we have the same setup as before but now instead of having a 'Data' section, we have a 'Transaction' (Tx) section
-                https://andersbrownworth.com/blockchain/tokens 
-                Tx shows all transactions in each block
-            Public/Private Keys
-                how do we know that, in fact, personX made a transaction to personY?  This is where we introduce 'public/private keys' and 'signing'
-                Private Key - used to 'sign' transactions
-                    *should only be known by the key holder
-                Public Key - key holder's public representation
-                    *created from your private key using the Elliptic Curve Digital Signature algorithm
-                    *our account public address is some derivitive of our public and private keys inputted in an algorithm
-                        *Private Key > Public Key > Pulic Address
-                https://andersbrownworth.com/blockchain/public-private-keys/keys
-            Signing
-                you can 'sign' some given data using your private key which would output a 'signature' string value  
-                    no one can take that message signature a reverse engineer it to get your private key
-                    however, using your public key, you can 'verify' that that signature (and initial data) is in fact yours
-                https://andersbrownworth.com/blockchain/public-private-keys/signatures
-            Signing Transactions   
-                same idea but now instead of some data, we can sign a transaction (from public address X to public address Y)
-                and then any public entity can verify the transaction using your public key
-                https://andersbrownworth.com/blockchain/public-private-keys/transaction
-        
-   
+// MEMORY, STORAGE, CALLDATA
+    // 6 places we can store data: stack, memory, storage, calldata, code, logs
+        // *we cannot define variables as stack, code, or logs
+    // storage - variable data exists permanently (outside the function being executed) and CAN be modified
+        // e.g. "uint256 public funNumber" is, by default, a 'storage' variable
+    // calldata - variable data exists temporarily and CANNOT be modified
+    // memory - variable data exists temporarily and CAN be modified
+        // in 2. d), why did we add 'memory' to string _name but not to uint256 _funNumber?
+            // if we add 'memory' to _funNumber, we get this error: "data location can only be specified for array, struct, or mapping types"
+            // meaning that solidity knows that a uint256 will live in memory, so we dont need to specify it, BUT we do for the string
+                // *strings are array of bytes, therefore we need to specify the data location for arrays
 
-     
+// 3. MAPPINGS
+    // what if we know someone's name but not their funNumber? Yes, we could look through each and every index in the 'people' array but that's not ideal. What if we had hundreds of objects in this array?
+    // mapping - data structure where a key is mapped to a single value; dictionary
+
+// DEPLOY CONTRACT TO TESTNET
+    // change the env from 'JavaScript VM' to 'Injected Web3' or 'Web3 Provider'
+    // Injected Web3 - injects Metamask execution env
+    // Click 'Deploy' (just like we've done previously) but this time Metamask will pop-up and ask us if we want to deploy the contract; we are signing a transaction
+        // *'Data' tab (in Metamask) refers to our contract
+        // after confirming the transaction, a transaction notification will show in Remix. Click on "view on etherscan" to see the transaction details on Etherscan
+        // if we navigate to the 'Deployed Contracts' section and copy the contract address to Etherscan. In Etherscan, we can see 1 transaction called 'Contract Creation'
+        // now we can do all the things we did previously but now on this Test Network
+            // if we click on the 'retrieve', 'people', or 'nameToFunNumber' functions, nothing happens because they are 'view' functions (reading the contract)
+            // if we click on the 'store' function, Metamask will pop-up asking us to sign the transaction, to modify the blockchain state; we should see this on Etherscan
+            // if we click on the 'addPerson' function, Metamask will pop-up asking us to sign the transaction, to modify the blockchain state; we should see this on Etherscan
+
+pragma solidity 0.8.8;
+    // ^0.8.8 tells the compiler that any version above 0.8.8 will work
+    // >=0.8.8 <0.9.0
+
+contract SimpleStorage {  // sort of like a Class like in OOP
+
+    // 1. a)
+    // variable - include 'type', 'visibility', variable name
+    uint256 public funNumber;  // initialized to zero
+
+    // 1. b)
+    // create a function (called 'store'), that takes some parameter (_funNumber), and let's set our variable (funNumber) to whatever parameter we decide to pass
+    // click 'Compile' (CTRL+S), then 'Deploy' contract..
+    function store(uint256 _funNumber) public {  
+        funNumber = _funNumber;
+    }
+    // output:
+        // input a value to the 'store' form, click the orange 'store' button > click the blue'funNumber' variable to output the uint256 number 
+        // *each time we call the contract, it costs some gas
+        // *larger functions cost more gas
+
+    // 1. c)
+    // we can create a function that return the value of funNumber
+    // this function mimics the 'public' visibility function
+    // *'view' function does NOT cost any gas; we are simply reading from the contract
+        // *if a different function called this retrieve function, then yes, there would be a cost
+    function retrieve() public view returns(uint256){
+        return funNumber;
+    }
+
+
+    // 2. a)
+    // create a new 'type', using a 'struct' that stores 2 values
+    // now we can use this new People 'type' and assign it to a variable (2. b))
+    struct People {
+        uint256 funNumber;
+        string name;
+    }
+
+    // 2. b)
+    // we can do exactly what we did before (1. a)) but now use our new People type (e.g. instead of uint256)
+    // let's create variable called 'person' using the People type
+    // since were using a struct, we need to use '{}'
+    //////People public person = People({funNumber: 2, name: "Kyle"});
+    // output:
+        // gives us a getter function (blue button called 'person') with two values; uint256: funNumber at index 0, string: name at index 1
+            // *when you create lists, they get indexed
+    // if you have many people to define, it may become cumbersome 
+    //////People public person2 = People({funNumber: 7, name: "Emma"});
+    // so let's create an 'array' (2. c))
+
+    // 2. c)
+    // create an 'array'; (same idea as before) specify array type (People[]), visibility, and array name (people)
+    People[] public people;
+        // output:
+            // input into the people form (uint256; 0) and we'll notice that nothing actually happens because our people list is empty
+        // so we need to create a function that will add people to our array (2. d))
+        // *People[] creates a 'dynamic array' since the size isnt specified; if we add a number within the brackets, then that would specify the size of the array
+
+    // 2. d)
+    // let's add people to the array that we've defined above
+    // create a function (addPerson), include inputs (_name, _funNumber)
+    // create a type People variable (newPerson) and include inputs within the {} (just like we saw in 2. b))
+        // *if we dont include 'memory', then we will receive an error: "Data location must be storage, memory, or calldata for variable"
+    // call the 'push' function to add to our 'people' array
+    function addPerson(string memory _name, uint256 _funNumber) public {
+        People memory newPerson = People({funNumber: _funNumber, name: _name});
+        people.push(newPerson);
+        // *another way to do this:
+        // create a new People object (our struct) that will take in the inputs (_funNumber, _name) and then add ('push') them to the 'person' (array)
+        ////people.push(People(_funNumber, _name));
+
+        // 3. a) ii)
+        nameToFunNumber[_name] = _funNumber;
+    }
+    // output:
+        // input into the addPerson form (string _name, uint256 _funNumber; John, 9) and click on the orange addPerson button
+        // input into the people form (uint256; 0) and click on the blue people button
+            // output for the 0 index should be: uint256: funNumber 9 (at index 0), string: name John (at index 1)
+        // if we input another entry (addPerson: Cassy, 11), then that will be the output for the 1 index of the people form
+        // if we input 2 into the people form, nothing will happen because we dont have a 3rd person
+
+
+    // 3. a) i)
+    // create a mapping (nameToFunNumber) that maps our names to a number
+    // *add to 2. d)
+    mapping(string => uint256) public nameToFunNumber;
+    // output:
+        // input into the nameToFunNumber form (string; Cassy) and nothing will happen since everything is initialized to 0
+        // input new entries into the addPerson form and try the nameToFunNumber form again and it should work
+
+}  
